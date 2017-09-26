@@ -1,0 +1,53 @@
+head{
+	font-size: 44;
+}
+body {
+  font-family: Helvetica;
+  background-color: #3498db;
+  color: black;
+  text-align: center;
+  font-size: 22;
+}
+
+a {
+  color: white;
+  font-size: 35;
+}
+
+.button {
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: white;
+  background-color: black;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.back {background-color: red;
+      box-shadow: 0 9px #f44336;
+      visibility: hidden;} /* Red */ 
+
+.button:hover {background-color: gray}
+
+.button:active {
+  background-color: black;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+  font-size: 30px;
+}
+
+#profile-pic{
+  max-width: 90px;
+}
+
+#profile-pic{
+  margin: 10px;
+}
+
+.section {
+  margin: 10px;
+}
