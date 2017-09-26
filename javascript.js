@@ -13,7 +13,7 @@ var num_buttons = 3;
             var dict = {Main: ["Hi, which phase of enrollment are you in currently?", 3, ["Phase 1", "Phase 2", "Adjustment Period"], ["Phase_1", "Phase_2", "Adjustment"], "Main"],
             Phase_1: ["Are you a declared Psychology major on calcentral?", 2, ["Yes", "No"], ["Psych_Yes", 'Psych_No'], "Main"], 
             Psych_Yes: ["Are Seats Available on Calcentral? (Don't rely on the green dot)", 2, ["Yes", "No"], ["Avail_yes", 'Avail_no'], "Phase_1"],
-            Avail_yes: ["You should be clear to enroll! Make sure to select a section with available seats. If you try to enroll in a section that is full, you will be placed on the waitlist.", 0, [], [], 'Psych_Yes', ["Available_Discussion_Seats.jpg"]],
+            Avail_yes: ["You should be clear to enroll! Make sure to select a section with available seats. If you try to enroll in a section that is full, you will be placed on the waitlist.", 0, [], [], 'Psych_Yes', ["Available_Discussion_Seats.JPG"]],
             Avail_no: ["If you are serious about taking the course, we recommend that you add yourself to the waitlist. This way, you have a better chance of enrolling once Phase 2 starts. Were you able to add yourself to the waitlist?", 2, ["Yes", "No"], ["Wait_able", 'Wait_unable'], "Psych_Yes"],
             Wait_able: ["Sit tight! There is a very good chance you will be enrolled when Phase 2 starts.", 0, [], [], "Avail_no"], 
             Wait_unable: ["Which of these errors are you receiving?", 2, ["No Waitlist Available", "Available seats reserved"], ["Error_wait", 'Error_avail'], "Psych_Yes", ["class_full_error.png", "reserved_seat_error.png"]], 
