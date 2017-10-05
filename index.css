@@ -1,17 +1,17 @@
 head{
-	font-size: 44;
+	font-size: 40;
 }
 body {
   font-family: Helvetica;
   background-color: #3597db;
-  color: black;
+  color:  black;
   text-align: center;
   font-size: 22;
 }
 
 a {
   color: white;
-  font-size: 35;
+  font-size: 32;
 }
 
 .button {
@@ -20,18 +20,19 @@ a {
   text-align: center;
   cursor: pointer;
   outline: none;
-  color: white;
-  background-color: black;
+  color: #FFD700;
+  background-color: #00008B;
   border: none;
   border-radius: 15px;
-  box-shadow: 0 9px #999;
+  box-shadow: 0 9px #2F4F4F;
 }
 
 .back {background-color: red;
       box-shadow: 0 9px #f44336;
-      visibility: hidden;} /* Red */ 
+      visibility: hidden;
+      color: white;} /* Red */ 
 
-.button:hover {background-color: gray}
+.button:hover {background-color: #2F4F4F;}
 
 .button:active {
   background-color: black;

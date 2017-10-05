@@ -7,7 +7,14 @@ var next_state_index = 3;
 var previous_state_index = 4;
 var image_index = 5;
 var first_phase = "Main";
-/*Format: [Question, number of responses, responses, list of next phase ids, previous state id, list of pictures]
+/*Format: [
+    Question, //
+    number of responses,
+    [list of responses], (what you want on the buttons)
+    [list of next phase ids], 
+    previous state id, 
+    [list of pictures]
+    ]
 
 For example, say you wanted to add a branch after Wait_able. First, you would go to the Wait_able entry and change the number of responses,
 responses, and list of next phase ids. If you wanted pictures as well, be sure to add a list of those:
@@ -26,6 +33,8 @@ We must then change the current Main phase's previous to main, as well as all ot
 Then we enter our new root into dict, which we call Main and with a previous state of "First"
 Then, in the html page, change the values of the buttons to the phase id values of the children of the root. Change button visibilities accordingly to how many are initiall displayed. 
 
+BOTTOM LINE: Make sure that next phase ids and previous ids are aligned in order correctly
+
 To see Flowchart of Current Tree, see: https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=flowchart#R1Zpbb5swFMc%2FTbTtoRXG3PKYZun2sFaV%2BtD1KXKCG2gJ
 joxz26efDSZcbKpOCw6tqsocji%2F8fM7fNnQEp%2BvDD4o20R0JcTKyrfAwgt9Htg182x6JXys8FhZn7BaGFY1D6VQZHuM%2FWBotad3GIc4ajoyQhMWbpnFJ0hQvWcOGKCX7ptsLSZq9btAKK4bHJUpU61McsqiwBq5V2X%2FieBWVPQNL
 3lmg5duKkm0q%2BxvZ8CX%2FKW6vUdmW9M8iFJJ9zQRnIzilhLCitD5McSLYltiKercdd0%2FjpjhlH6pQjoMdy2fHIUchLwllEVmRFCWzynqTPx8WLVj8KmLrhBcBL%2FJO6fG3tOcXz%2BLiGvpuaXjANF5jhqn0esWMHWUAoC0j3FR1%2
@@ -36,20 +45,133 @@ vXKsJlJoUi7tT5TOJYPGKm3%2FZzrnVSeUomPNYUPiVETOqeUHYajNGWydfVxgtagXTVZzcBrbx6bF7W
 R1N%2Fpv6pmP39VbAAUN4Walla%2BqTTtn5B0Rgm%2F6bDExR%2BoUvwx5ai8xNF9mm5phtUFp6cr14Ty3qrkMUERA0RcQDGhHxNCLin0NE1HerM0oJne85yY6ZFIB5ldutaGl4PGFri%2B17JkVZfStb8ERiI6EBOo3w8k0MrgK7IIchcgWtl92%
 2Bb5ArVPdwuahot3AaQRggUBC4DZ6OyY8HEOh5HrWH61rWx2JX%2FDLM1G99eugTKL%2Bs%2Ft2nOPNV%2F1MFZ38B
 */
-var dict = {Main: ["Hi, which phase of enrollment are you in currently?", 3, ["Phase 1", "Phase 2", "Adjustment Period"], ["Phase_1", "Phase_2", "Adjustment"], "First", []],
-Phase_1: ["Are you a declared Psychology major on calcentral?", 2, ["Yes", "No"], ["Psych_Yes", 'Psych_No'], "Main", []], 
-Psych_Yes: ["Are Seats Available on Calcentral? (Don't rely on the green dot, as this can often be misleading. Look at the class in your scheudle planner, and click on the little 'i' icon. If the Reserve Caps is full, then the class is full for phase 1)", 2, ["Yes", "No"], ["Avail_yes", 'Avail_no'], "Phase_1", ["reserve_caps.png"]],
-Avail_yes: ["You should be clear to enroll! Make sure to select a section with available seats. If you try to enroll in a section that is full, you will be placed on the waitlist.", 0, [], [], 'Psych_Yes', ["Available_Discussion_Seats.JPG"]],
-Avail_no: ["If you are serious about taking the course, we recommend that you add yourself to the waitlist. This way, you have a better chance of enrolling once Phase 2 starts. Were you able to add yourself to the waitlist?", 2, ["Yes", "No"], ["Wait_able", 'Wait_unable'], "Psych_Yes", []],
-Wait_able: ["Sit tight! There is a very good chance you will be enrolled when Phase 2 starts.", 0, [], [], "Avail_no", []], 
-Wait_unable: ["Which of these errors are you receiving?", 2, ["No Waitlist Available", "Available seats reserved"], ["Error_wait", 'Error_avail'], "Psych_Yes", ["class_full_error.png", "reserved_seat_error.png"]], 
-Error_wait: ["Seats reserved for Psych majors and the waitlist are currently full. Please try to enroll in Phase 2, and if you have any more questions, feel free to email psychscheduling@berkeley.edu", 0, [], [], "Wait_unable", ["class_full_error.png"]],
-Error_avail: ["This message does not mean that you did not satisfy the prerequisite listed on the catalog. Please try again by checking the 'waitlist if full' option on calcentral. Check 'waitlist if full' as shown below to place yourself on the waitlist. This will give you the best chance for getting enrolled in phase 2. If you have other concerns, feel free to email psychscheduling@berkeley.edu", 0, [], [], "Wait_unable", ["waitlist_box.png"]],
-Psych_No: ["Unfortunately, enrollment in upper division Psychology courses are reserved for declared Psychology Majors during Phase 1. However, you can add yourself to the waitlist to maximize your chances of being enrolled in Phase 2. Is the waitlist for the class full? (To check, go to the online schedule of classes and look at 'Waitlist Capacity')", 2, ["Yes", "No"], ['Wait_yes', 'Wait_no'], "Phase_1", ["waitlist_capacity.png"]],
-Wait_yes: ["Unfortunately, the waitlist is currently full. Available seats are reserved for Psychology Majors. Please try to enroll in Phase 2, and if you have any more questions, feel free to email psychscheduling@berkeley.edu", 0, [], [], "Psych_No", ["class_full_error.png"]],
-Wait_no: ["Check 'waitlist if full' on calcentral and place yourself on the waitlist. This will give you the best chance for getting enrolled in phase 2. If you have other concerns, feel free to email psychscheduling@berkeley.edu", 0, [], [], "Psych_No", ["waitlist_box.png"]],
-Phase_2:["Phase 2 hasn't started yet!", 0, [], [], "Main", []],
-Adjustment:["The Adjustment Period hasn't started yet!", 0, [], [], "Main", []]
+var dict = {
+    Main: ["Hi, which phase of enrollment are you in currently?",
+            3, 
+            ["Phase 1", "Phase 2", "Adjustment Period"], 
+            ["Phase_1", "Phase_2", "Adjustment"], 
+            "root", 
+            []
+        ],
+    Phase_1: ["Are you a declared Psychology major on calcentral?", 
+            2, 
+            ["Yes", "No"], 
+            ["Psych_Yes", 'Psych_No'], 
+            "Main", 
+            []
+        ], 
+Psych_Yes: ["Are Seats Available on Calcentral? (Don't rely on the green dot, as this can often be misleading. Look at the class in your scheudle planner, and click on the i icon (see below). If the Reserve Caps is full, then the class is full for phase 1)",
+             2, 
+            ["Yes", "No"], 
+            ["Avail_yes", 'Avail_no'], 
+            "Phase_1", 
+            ["reserve_caps.png"]
+        ],
+Avail_yes: ["You should be clear to enroll! Make sure to select a section with available seats as seen below. If you try to enroll in a section that is full, you will be placed on the waitlist. Also make sure that you don't have a schedule conflict before selecting classes or the system will not let you enroll.", 
+            0, 
+            [], 
+            [], 
+            'Psych_Yes', 
+            ["Available_Discussion_Seats.JPG"]
+        ],
+Avail_no: ["If you are serious about taking the course, we recommend that you add yourself to the waitlist. This way, you have a better chance of enrolling once Phase 2 starts. Were you able to add yourself to the waitlist?", 
+            2, 
+            ["Yes", "No"], 
+            ["Wait_able", 'Wait_unable'], 
+            "Psych_Yes", 
+            []
+        ],
+Wait_able: ["Sit tight! There is a very good chance you will be enrolled when Phase 2 starts.",
+            0, 
+            [], 
+            [], 
+            "Avail_no", 
+            []
+        ], 
+Wait_unable: ["Which of these errors are you receiving?", 
+            3, 
+            ["No Waitlist Available", "Available seats reserved", "Not listed here"], 
+            ["Error_wait", 'Error_avail', "Error_other"], 
+            "Psych_Yes", 
+            ["class_full_error_small.png", "reserved_seat_error_small.png"]
+        ], 
+Error_wait: ["Seats reserved for Psych majors and the waitlist are currently full. Please try to enroll in Phase 2, and if you have any more questions, feel free to email psychscheduling@berkeley.edu", 
+            0, 
+            [], 
+            [], 
+            "Wait_unable", 
+            ["class_full_error.png"]
+        ],
+Error_avail: ["This message does not mean that you did not satisfy the prerequisite listed on the catalog. Please try again by checking the 'waitlist if full' option on calcentral as seen below. This will give you the best chance for getting enrolled in phase 2. If you have other concerns, feel free to email psychscheduling@berkeley.edu",
+            0,
+            [],
+            [], 
+            "Wait_unable", 
+            ["waitlist_box.png"]
+        ],
+Error_other: ["Please email psychscheduling@berkeley.edu with a screenshot of your error message.",
+            0,
+            [],
+            [],
+            "Wait_unable",
+            []
+            ],
+Psych_No: ["Unfortunately, enrollment in upper division Psychology courses are reserved for declared Psychology Majors during Phase 1. However, you can add yourself to the waitlist to maximize your chances of being enrolled in Phase 2. Is the waitlist for the class full? (To check, go to the online schedule of classes and look at 'Waitlist Capacity')", 
+            2, 
+            ["Yes", "No"], 
+            ['Wait_yes', 'Wait_no'], 
+            "Phase_1", 
+            ["waitlist_capacity.png"]
+        ],
+Wait_yes: ["Unfortunately, the waitlist is currently full. Available seats are reserved for Psychology Majors. Please try to enroll in Phase 2, and if you have any more questions, feel free to email psychscheduling@berkeley.edu", 
+            0, 
+            [], 
+            [], 
+            "Psych_No", 
+            ["class_full_error.png"]
+        ],
+Wait_no: ["Check 'waitlist if full' on calcentral and place yourself on the waitlist. This will give you the best chance for getting enrolled in phase 2. If you have other concerns, feel free to email psychscheduling@berkeley.edu", 
+            0, 
+            [], 
+            [], 
+            "Psych_No", 
+            ["waitlist_box.png"]
+        ],
+Phase_2: ["Are you an incoming Spring 2018 Transfer Student?", 
+            2, 
+            ["Yes", "No"], 
+            ["Transfer_yes", "Transfer_no"], 
+            "Main", 
+            []
+        ],
+Transfer_yes: ["You should prioritize enrolling in Psych 101. A handful of seats are reserved for you for your first semester. Don't overload yourself!",
+            0,
+            [],
+            [],
+            "Phase_2",
+            []
+            ],
+Transfer_no: ["Are you a declared Psychology Major?",
+            2,
+            ["Yes", "No"],
+            ["Psych_yes2", "Psych_No2"],
+            "Phase_2",
+            []
+            ],
+Psych_yes2: ["Seats are available on a first come first serve basis during Phase 2. Are you already on the waitlist?",
+            2,
+            [],
+            [],
+            "Transfer_no",
+            []
+            ],
+Adjustment:["The Adjustment Period hasn't started yet!", 
+            0, 
+            [], 
+            [], 
+            "Main", 
+            []
+        ]
 };
 function changeText(value) {
     document.getElementById('text').innerHTML = dict[value][display_index];
@@ -62,6 +184,7 @@ function changeText(value) {
             } else {
             document.getElementById(String(counter)).innerHTML = dict[value][responses_index][counter];
             document.getElementById(String(counter)).value = dict[value][next_state_index][counter];
+            document.getElementById(String(counter)).style.visibility = "visible";
             }
             counter++;
         }
@@ -138,7 +261,7 @@ function goBack(value){
         }
     }
     document.getElementById('back').value = dict[value][previous_state_index];
-    if (document.getElementById('back').value == "First") {
+    if (document.getElementById('back').value == "root") {
         document.getElementById('back').style.visibility = "hidden";
     }
 }
