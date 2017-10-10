@@ -165,7 +165,7 @@ Psych_2: ["Does the course you are trying to enroll in appear to be open <br>(Do
             "Transfer_no",
             []
             ],
-Dot_yes: ["In most cases, you should be clear to enroll. Are you receiving one of the following errors?",
+Dot_yes: ["In most cases, you should be clear to enroll.<br>Are you receiving one of the following errors?",
             3,
             ["Seats Reserved", "Schedule Conflict", "Not Listed Here"],
             ["Error_reserved", "Error_schedule", "Error_other2"],
