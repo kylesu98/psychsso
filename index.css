@@ -1,17 +1,22 @@
-head{
-	font-size: 40;
+html{
+  background-color: #000085;
+  margin-top: 20px;
 }
 body {
-  font-family: Helvetica;
-  background-color: #3597db;
+  font-family: Tahoma;
+  background-color: #DCDCDC; /*#3597db*/
   color:  black;
   text-align: center;
   font-size: 22;
+  width: 76%;
+  margin: auto;
+  margin-bottom: 20px;
 }
 
 a {
-  color: white;
+  color: black;
   font-size: 32;
+
 }
 
 .button {
@@ -25,6 +30,7 @@ a {
   border: none;
   border-radius: 15px;
   box-shadow: 0 9px #2F4F4F;
+  font: Times;
 }
 
 .back {background-color: red;
