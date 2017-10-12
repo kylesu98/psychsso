@@ -78,12 +78,12 @@ a {
   font-size: 30px;
 }
 
-#profile-pic{
-  max-width: 90px;
-}
+#bottom{
+  bottom:20px;
+  margin-left:0px;
+  font-size: 20;
+  position: fixed;
 
-#profile-pic{
-  margin: 10px;
 }
 
 .section {

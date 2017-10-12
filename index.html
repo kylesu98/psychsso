@@ -3,9 +3,12 @@
         <link rel="stylesheet" href="index.css"></link>
         <script src="javascript.js"></script>
     </head>
+    <div class = "buttons">
     <button class="back" value = 'root' id = 'back' onclick="goBack(this.value);" style = "float: left">Back</button>
+    <button class="reset" value = 'other' id = 'reset' onclick="reset();" style = "float: right">Reset</button>
+    </div>
          <heading>Psychology Enrollment Q & A </heading>
-         <button class="reset" value = 'other' id = 'reset' onclick="reset();" style = "float: right">Reset</button>
+         
     <body>
         
         <div class="section">
@@ -25,6 +28,9 @@
             <button class="button" value = 'Adjustment_Period' id = '2' onclick="changeText(this.value);" style= "visibility: visible">Adjustment Period</button>
             <br>
             <input type="image" src="null" name="classError" id="2i" style= "visibility: hidden" />
+        </div>
+        <div class = "wrapper" id ="bottom">
+            &copy; PsychSSO
         </div>
     </body>
 </html>
