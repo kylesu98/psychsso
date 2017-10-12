@@ -212,6 +212,7 @@ function changeText(value) {
     document.getElementById('text').innerHTML = dict[value][display_index];
     document.getElementById('back').style.visibility = "visible";
     document.getElementById('back').value = dict[value][previous_state_index];
+    document.getElementById('reset').style.visibility = "visible"
     var counter = 0;
     while (counter < num_buttons){
        if (counter >= dict[value][num_responses_index]) {
@@ -298,6 +299,14 @@ function goBack(value){
     document.getElementById('back').value = dict[value][previous_state_index];
     if (document.getElementById('back').value == "root") {
         document.getElementById('back').style.visibility = "hidden";
+        document.getElementById('reset').style.visibility = "hidden";
     }
 }
+function reset(){
+    goBack("Main");
+    if (document.getElementById('back').value == "root") {
+        document.getElementById('reset').style.visibility = "hidden";
+    }
+}
+
         
