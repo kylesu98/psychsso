@@ -9,6 +9,8 @@ heading{
 body {
   font-family: Tahoma;
   background-color: #DCDCDC; /*#3597db*/
+  background-color: #fff;
+  background-color: rgba(255,255,255,0.85);
   color:  black;
   text-align: center;
   font-size: 22;
@@ -81,7 +83,7 @@ a {
 #bottom{
   bottom:20px;
   margin-left:0px;
-  font-size: 20;
+  font-size: 15;
   position: fixed;
 
 }

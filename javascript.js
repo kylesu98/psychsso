@@ -60,12 +60,12 @@ var dict = {
             "Main", 
             []
         ], 
-Psych_Yes: ["Are Seats Available on CalCentral?<br>(Don't rely on the green dot, as this can often be misleading. Look at the class in your scheudle planner, and click on the i icon (see below). If the Reserve Caps is full, then the class is full for phase 1)",
+Psych_Yes: ["Check if seats are open in the class! Don't rely on the green dot, as this can often be misleading. Look at the class in your schedule planner, and click on the 'i' icon (see below).<br>If the Reserve Caps is full, then the class is full for phase 1.<br>Are Seats Available on CalCentral?",
              2, 
             ["Yes", "No"], 
             ["Avail_yes", 'Avail_no'], 
             "Phase_1", 
-            ["reserve_caps.png"]
+            ["reserve_caps2.png"]
         ],
 Avail_yes: ["You should be clear to enroll! Make sure to select a section with available seats as seen below. If you try to enroll in a section that is full, you will be placed on the waitlist. Also make sure that you don't have a schedule conflict before selecting classes or the system will not let you enroll.", 
             0, 
@@ -90,47 +90,47 @@ Wait_able: ["Sit tight! There is a very good chance you will be enrolled when Ph
         ], 
 Wait_unable: ["Which of these errors are you receiving?", 
             3, 
-            ["No Waitlist Available", "Available seats reserved", "Not listed here"], 
-            ["Error_wait", 'Error_avail', "Error_other"], 
+            ["No Waitlist Available", "Schedule Conflict", "Unit Limit Exceeded"], 
+            ["Error_wait", 'Error_conflict', "Error_units"], 
             "Psych_Yes", 
-            ["class_full_error_small.png", "reserved_seat_error_small.png"]
+            ["class_full_error_small.png", "schedule_conflict.png", "unit_limit.png"]
         ], 
-Error_wait: ["Seats reserved for Psych majors and the waitlist are currently full. Please try to enroll in Phase 2, and if you have any more questions, feel free to email psychscheduling@berkeley.edu", 
+Error_wait: ["Seats reserved for Psych majors and the waitlist are currently full. Please try again in Phase 2.", 
             0, 
             [], 
             [], 
             "Wait_unable", 
             ["class_full_error.png"]
         ],
-Error_avail: ["This message does not mean that you did not satisfy the prerequisite listed on the catalog. Please try again by checking the 'waitlist if full' option on CalCentral as seen below. This will give you the best chance for getting enrolled in phase 2. If you have other concerns, feel free to email psychscheduling@berkeley.edu",
+Error_conflict: ["This error means you have a schedule conflict with another enrolled course. Please resolve this schedule conflict and try again.",
             0,
             [],
             [], 
             "Wait_unable", 
-            ["waitlist_box.png"]
+            ["schedule_conflict.png"]
         ],
-Error_other: ["Please email psychscheduling@berkeley.edu with a screenshot of your error message.",
+Error_units: ["This error means that you are trying to enroll in more than 13.5 units. These units account for both enrolled and waitlisted classes. Please either allocate unit space or try again in phase 2.",
             0,
             [],
             [],
             "Wait_unable",
-            []
+            ["unit_limit.png"]
             ],
-Psych_No: ["Unfortunately, enrollment in upper division Psychology courses are reserved for declared Psychology Majors during Phase 1. However, you can add yourself to the waitlist to maximize your chances of being enrolled in Phase 2. Is the waitlist for the class full? (To check, go to the online schedule of classes and look at 'Waitlist Capacity')", 
+Psych_No: ["Unfortunately, enrollment in upper division Psychology courses is reserved for declared Psych Majors during Phase 1. You can maximize your chances of being enrolled in Phase 2 by adding to the waitlist.<br> Is the waitlist for the class full? <br>(To check, go to the online of classes and look at 'Waitlist Capacity')", 
             2, 
             ["Yes", "No"], 
             ['Wait_yes', 'Wait_no'], 
             "Phase_1", 
             ["waitlist_capacity.png"]
         ],
-Wait_yes: ["Unfortunately, the waitlist is currently full. Available seats are reserved for Psychology Majors. Please try to enroll in Phase 2, and if you have any more questions, feel free to email psychscheduling@berkeley.edu", 
+Wait_yes: ["Unfortunately, the waitlist for Phase 1 is currently full. <br>Available seats are reserved for Psychology Majors.<br>Please try to enroll in Phase 2.", 
             0, 
             [], 
             [], 
             "Psych_No", 
             ["class_full_error.png"]
         ],
-Wait_no: ["Check 'waitlist if full' on CalCentral and place yourself on the waitlist. This will give you the best chance for getting enrolled in phase 2. If you have other concerns, feel free to email psychscheduling@berkeley.edu", 
+Wait_no: ["Check 'waitlist if full' on CalCentral and place yourself on the waitlist. This will give you the best chance for getting enrolled in phase 2.", 
             0, 
             [], 
             [], 
@@ -179,12 +179,12 @@ Dot_no: ["Unfortunately, the class is full but you can add yourself to the waitl
             "Psych_2",
             ["waitlist_box.png"]
             ],
-Error_reserved:["During phase 2, there are a certain number of seats reserved for transfer students. This error means that seats for Psych majors and other students have been taken. To add yourself to the waitlit, check the 'Waitlist if full' option on Calcentral", 
+Error_reserved:["During phase 2, there are a certain number of seats reserved for transfer students. This error means that seats for Psych majors and other students have been taken. To add yourself to the waitlist, check the 'Waitlist if full' option on Calcentral", 
             0, 
             [], 
             [], 
             "Dot_yes", 
-            ["reserved_seat_error.png"]
+            ["waitlist_box.png"]
         ],
 Error_schedule:["Unfortunately, you have a schedule conflict and the system does not let you enroll directly in the class. You may add yourself to the waitlist, but you would be forever stuck there unless you resolve the schedule conflict", 
             0, 
@@ -204,15 +204,18 @@ Adjustment:["The Adjustment Period hasn't started yet!",
             0, 
             [], 
             [], 
-            "Main", 
+            "Main",
             []
         ]
 };
+
+// This message does not mean that you did not satisfy the prerequisite listed on the catalog. Please try again by checking the 'waitlist if full' option on CalCentral as seen below. This will give you the best chance for getting enrolled in phase 2. If you have other concerns, feel free to email psychscheduling@berkeley.edu
 function changeText(value) {
     document.getElementById('text').innerHTML = dict[value][display_index];
     document.getElementById('back').style.visibility = "visible";
     document.getElementById('back').value = dict[value][previous_state_index];
     document.getElementById('reset').style.visibility = "visible"
+    document.getElementById('bottom').style.visibility = "hidden";
     var counter = 0;
     while (counter < num_buttons){
        if (counter >= dict[value][num_responses_index]) {
@@ -300,12 +303,14 @@ function goBack(value){
     if (document.getElementById('back').value == "root") {
         document.getElementById('back').style.visibility = "hidden";
         document.getElementById('reset').style.visibility = "hidden";
+        document.getElementById('bottom').style.visibility = "visible";
     }
 }
 function reset(){
     goBack("Main");
     if (document.getElementById('back').value == "root") {
         document.getElementById('reset').style.visibility = "hidden";
+        document.getElementById('bottom').style.visibility = "visible";
     }
 }
 
