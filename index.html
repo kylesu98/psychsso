@@ -3,9 +3,14 @@
         <link rel="stylesheet" href="index.css"></link>
         <script src="javascript.js"></script>
     </head>
+    <div class = "buttons">
+    <button class="back" value = 'root' id = 'back' onclick="goBack(this.value);" style = "float: left">Back</button>
+    <button class="reset" value = 'other' id = 'reset' onclick="reset();" style = "float: right">Reset</button>
+    </div>
+         <input type="image" src="logo.png" name="logo" id="logo" style= "margin-top: 10px" width= "350"/><br><heading>Enrollment Q & A </heading>
+         
     <body>
-        <h1> Psychology Enrollment Q & A </h1>
-        <button class="button back" value = 'root' id = 'back' onclick="goBack(this.value);">Back</button>
+        
         <div class="section">
             <a id = "text"> Hi, which phase of enrollment are you in currently? </a>
             <br>
@@ -20,7 +25,7 @@
             <br>
             <input type="image" src="null" name="classError" id="1i" style= "visibility: hidden" />
             <br>
-            <button class="button" value = 'Adjustment_Period' id = '2' onclick="changeText(this.value);" style= "visibility: visible">Adjustment Period</button>
+            <button class="button" value = 'Adjustment' id = '2' onclick="changeText(this.value);" style= "visibility: visible">Adjustment Period</button>
             <br>
             <input type="image" src="null" name="classError" id="2i" style= "visibility: hidden" />
         </div>
@@ -35,5 +40,8 @@
 		  gtag('config', 'UA-108239019-1');
 		</script>
 
+        <div class = "wrapper" id ="bottom">
+            Courtesy of UC Berkeley Psychology Student Services Office - Developed by Kyle Su
+        </div>
     </body>
 </html>
