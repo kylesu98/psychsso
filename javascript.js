@@ -130,12 +130,26 @@ Wait_yes: ["Unfortunately, the waitlist for Phase 1 is currently full. <br>Avail
             "Psych_No", 
             ["class_full_error.png"]
         ],
-Wait_no: ["Check 'waitlist if full' on CalCentral and place yourself on the waitlist. This will give you the best chance for getting enrolled in phase 2.", 
+Wait_no: ["Check 'waitlist if full' on CalCentral and place yourself on the waitlist. This will give you the best chance for getting enrolled in phase 2.<br> Were you able to add yourself to the waitlist?", 
+            2, 
+            ["Yes", "No"], 
+            ["Wait_able2", "Wait_unable2"], 
+            "Psych_No", 
+            ["waitlist_box.png"]
+        ],
+Wait_able2: ["Sit tight and wait for Phase 2!", 
             0, 
             [], 
             [], 
-            "Psych_No", 
-            ["waitlist_box.png"]
+            "Wait_no", 
+            []
+        ],
+Wait_unable2: ["Please email psychscheduling@berkeley.edu with a picture of your error.",
+            0,
+            [],
+            [],
+            "Wait_no",
+            [],
         ],
 Phase_2: ["Are you an incoming Spring 2018 Transfer Student?", 
             2, 
@@ -216,6 +230,7 @@ function changeText(value) {
     document.getElementById('back').value = dict[value][previous_state_index];
     document.getElementById('reset').style.visibility = "visible"
     document.getElementById('bottom').style.visibility = "hidden";
+    document.getElementById('Waiting').style.visibility = "hidden";
     var counter = 0;
     while (counter < num_buttons){
        if (counter >= dict[value][num_responses_index]) {
@@ -304,6 +319,7 @@ function goBack(value){
         document.getElementById('back').style.visibility = "hidden";
         document.getElementById('reset').style.visibility = "hidden";
         document.getElementById('bottom').style.visibility = "visible";
+        document.getElementById('Waiting').style.visibility = "visible";
     }
 }
 function reset(){
@@ -311,6 +327,7 @@ function reset(){
     if (document.getElementById('back').value == "root") {
         document.getElementById('reset').style.visibility = "hidden";
         document.getElementById('bottom').style.visibility = "visible";
+        document.getElementById('Waiting').style.visibility = "visible";
     }
 }
 
