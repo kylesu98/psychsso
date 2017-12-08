@@ -214,13 +214,146 @@ Error_other2:["Please email psychscheduling@berkeley.edu with a screenshot of yo
             "Dot_yes",
             []
         ],
-Adjustment:["The Adjustment Period hasn't started yet!", 
-            0, 
-            [], 
-            [], 
+Adjustment:["What kind of student are you?", 
+            3, 
+            ["UC Berkeley Registered Student", "UCEAP Exchange Student", "Concurrent enrollment student"], 
+            ["Regular", "Exchange", "Concurrent"], 
             "Main",
             []
-        ]
+        ],
+Regular:["Are you currently enrolled in the class?",
+            2,
+            ["Yes", "No"],
+            ["Enrolled_yes", "Enrolled_no"],
+            "Adjustment",
+            []
+            ],
+Enrolled_yes:["Do you want to switch sections?",
+            2,
+            ["Yes", "No"],
+            ["Switch_yes", "Switch_no"],
+            "Regular",
+            []
+            ],
+Switch_yes:["To switch sections, go to Class Adjustment section under My Academics on Calcentral and click options.<br>From here, you can swap into the discussion you want.<br>KEEP IN MIND: You will be placed on the waitlist if you switch into a full discussion section.",
+            0,
+            [],
+            [],
+            "Enrolled_yes",
+            []
+            ],
+Switch_no:["Are you dropped due to fees?",
+            2,
+            ["Yes", "No"],
+            ["Fees_yes", "Fees_no"],
+            "Enrolled_yes",
+            []
+            ],
+Fees_yes:["Unfortunately due to the high demand of Psychology classes, students dropped due to fees are dropped from the class without special consideration. Try to add yourself to the waitlist if possible.<br>For departmental policies see "+"here".link("http://psychology.berkeley.edu/students/undergraduate-program/enrollment-policies") + ".",
+            0,
+            [],
+            [],
+            "Switch_no",
+            []
+            ],
+Fees_no:["Come visit the Psychology Student Services Office with your question!<br>We are located at 3305 Tolman.<br>Drop in hours are 9AM - 12PM, 1PM - 4PM.",
+            0,
+            [],
+            [],
+            "Switch_no",
+            []
+            ],
+Enrolled_no:["Are you on the waitlist?",
+            2,
+            ["Yes", "No"],
+            ["Waitlist_yes", "Waitlist_no"],
+            "Regular",
+            []
+            ],
+Waitlist_yes:["Do you want to switch sections?",
+            2,
+            ["Yes", "No"],
+            ["Wait_switch_yes", "Wait_switch_no"],
+            "Enrolled_no",
+            []
+            ],
+Wait_switch_yes:["Unfortunately, students on the waitlist can't switch sections.<br>Instructions will be sent out to all waitlisted students via email by January 19th on how to switch sections.",
+            0,
+            [],
+            [],
+            "Waitlist_yes",
+            []
+            ],
+Wait_switch_no:["Do you have a time conflict?",
+            2,
+            ["Yes", "No"],
+            ["Conflict_yes", "Conflict_no"],
+            "Waitlist_yes",
+            []
+            ],
+Conflict_yes:["Please resolve the time conflict by either dropping the conflicting class or completeing the " + "registrar's form".link("http://registrar.berkeley.edu/registration/enrollment") +" for a time conflict override.",
+            0,
+            [],
+            [],
+            "Wait_switch_no",
+            []
+            ],
+Conflict_no:["By adding this class are you going over the 20.5 units?",
+            2,
+            ["Yes", "No"],
+            ["Units_yes", "Units_no"],
+            "Wait_switch_no",
+            []
+            ],
+Units_yes:["To raise your unit limit:<br>If you are declared, see your major advisor.<br>For undeclared students, see an L&S advisor.",
+            0,
+            [],
+            [],
+            "Conflict_no",
+            []
+            ],
+Units_no:["Come visit the Psychology Student Services Office with your question!<br>We are located at 3305 Tolman.<br>Drop in hours are 9AM - 12PM, 1PM - 4PM.",
+            0,
+            [],
+            [],
+            "Conflict_no",
+            []
+            ],           
+Waitlist_no:["The majority of Psychology are currently impacted. If you are not on the waitlist at this point it is unlikely you will be able to enroll. We recommend to monitor the waitlist and try again if a spot opens up.<br><br>Enrollment will be on lockdown beginning week 2.",
+            0,
+            [],
+            [],
+            "Enrolled_no",
+            []
+            ],
+Exchange:["Are you declared Psychology at your Home Institution?",
+            2,
+            ["Yes", "No"],
+            ["Declared_yes", "Declared_no"],
+            "Adjustment",
+            []
+            ],
+Declared_yes:["Please refer to the following instructions:<br>1.You need to provide proof that you are a declared Psychology major.<br>2. Provide 2 courses you wish to enroll in.<br><br>Bring this information to the Pschology Student Services Office.<br>For restrictions, see " + "here".link("http://psychology.berkeley.edu/students/undergraduate-program/enrollment-policies") + ".",
+            0,
+            [],
+            [],
+            "Exchange",
+            []
+            ],  
+Declared_no:["Please add yourself to the waitlist.<br>For details on enrollent policies, see "+ "here".link("http://psychology.berkeley.edu/students/undergraduate-program/enrollment-policies") + ".",
+            0,
+            [],
+            [],
+            "Exchange",
+            []
+            ],        
+Concurrent:["Please contact Dr. Bayne at bayne@berkeley.edu with your questions.<br><br>In addition, please consider the following:<br>1. Make sure to attend the course regularly.<br>2. Ask the instructor to add you on bcourses to keep up with material.<br> 3. Enrollment happens during weeks 4 and 5 of instruction so please be patient with the process.",
+            0,
+            [],
+            [],
+            "Adjustment",
+            []
+            ]
 };
 
 // This message does not mean that you did not satisfy the prerequisite listed on the catalog. Please try again by checking the 'waitlist if full' option on CalCentral as seen below. This will give you the best chance for getting enrolled in phase 2. If you have other concerns, feel free to email psychscheduling@berkeley.edu
@@ -230,7 +363,7 @@ function changeText(value) {
     document.getElementById('back').value = dict[value][previous_state_index];
     document.getElementById('reset').style.visibility = "visible"
     document.getElementById('bottom').style.visibility = "hidden";
-    document.getElementById('Waiting').style.visibility = "hidden";
+    // document.getElementById('Waiting').style.visibility = "hidden";
     var counter = 0;
     while (counter < num_buttons){
        if (counter >= dict[value][num_responses_index]) {
@@ -319,7 +452,7 @@ function goBack(value){
         document.getElementById('back').style.visibility = "hidden";
         document.getElementById('reset').style.visibility = "hidden";
         document.getElementById('bottom').style.visibility = "visible";
-        document.getElementById('Waiting').style.visibility = "visible";
+        // document.getElementById('Waiting').style.visibility = "visible";
     }
 }
 function reset(){
@@ -327,7 +460,7 @@ function reset(){
     if (document.getElementById('back').value == "root") {
         document.getElementById('reset').style.visibility = "hidden";
         document.getElementById('bottom').style.visibility = "visible";
-        document.getElementById('Waiting').style.visibility = "visible";
+        // document.getElementById('Waiting').style.visibility = "visible";
     }
 }
 
